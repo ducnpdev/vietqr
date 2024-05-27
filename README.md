@@ -19,7 +19,7 @@
 ## Cài Đặt
 
 ```bash
-go get
+go get github.com/ducnpdev/vietqr
 ```
 
 ## Ví Dụ:
