@@ -20,6 +20,5 @@ func genAdditionalDataFieldTemplateTag08(description string) string {
 		return ""
 	}
 	tag08 := fmt.Sprintf("08%d%s", len(description), description)
-	fmt.Println("tag08:", tag08)
 	return tag08
 }
