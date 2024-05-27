@@ -1,4 +1,4 @@
-# github.com/ducnpdev/vietqr-golang
+# # vietQR - Golang
 thư viện hỗ trợ mã QR để thanh toán thông qua NAPAS với ngôn ngữ lập trình `Golang`
 
 ## Install
