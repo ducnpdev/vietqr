@@ -13,6 +13,7 @@ func genContent(req RequestGenerateViQR) string {
 				AcqID:     req.AcqID,
 				AccountNo: req.AccountNo,
 			}) +
+			genMCC(req.Mcc) +
 			genTransactionCurrency(req.TransactionCurrency) +
 			genTransactionAmount(req.TransactionAmount) +
 			genCountryCode(req.CountryCode) +

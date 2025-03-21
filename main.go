@@ -14,6 +14,7 @@ func main() {
 		AdditionalDataFieldTemplate: AdditionalDataFieldTemplate{
 			Description: "test noi dungtest noi dungtest noi dungtest noi dung",
 		},
+		Mcc: "5139",
 	})
 
 	fmt.Println("content-main:", content)

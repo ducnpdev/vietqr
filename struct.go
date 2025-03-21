@@ -22,6 +22,11 @@ type (
 		// Thông tin định danh ĐVCNTT: tag
 		MerchantAccountInformation `json:"merchantAccountInformation"`
 
+		// Merchant Category Code MCC
+		// identity merchant type
+		// apply different fee base on mcc
+		Mcc string `json:"mcc"`
+
 		// Mã tiền tệ: tag 53
 		// mặc định là VND: 704
 		TransactionCurrency string `json:"transactionCurrency"`
