@@ -7,12 +7,15 @@
 
 - [VietQR - Golang](#vietqr---golang)
   - [Table of Contents](#table-of-contents)
+  - [Napas Document](#napas-document)
   - [Chức Năng](#chức-năng)
   - [Cài Đặt](#cài-đặt)
   - [Ví Dụ:](#ví-dụ)
   - [Tách Các Filed Tag](#tách-các-filed-tag)
   - [License](#license)
 
+## Napas Document
+- link document của napas: https://vietqr.net/portal-service/download/documents/QR_Format_T&C_v1.0_VN_092021.pdf
 ## Chức Năng
 - hỗ trợ tạo ra qr để thanh toán( accountNo, amount, nội dung, ...)
 
