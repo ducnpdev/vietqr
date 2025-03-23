@@ -17,6 +17,7 @@ func genContent(req RequestGenerateViQR) string {
 			genTransactionCurrency(req.TransactionCurrency) +
 			genTransactionAmount(req.TransactionAmount) +
 			genCountryCode(req.CountryCode) +
+			genRecieverName(req.ReceiverName) +
 			genAdditionalDataFieldTemplate(req.AdditionalDataFieldTemplate)
 
 	crc := genCRC(content)

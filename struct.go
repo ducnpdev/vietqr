@@ -22,7 +22,7 @@ type (
 		// Thông tin định danh ĐVCNTT: tag
 		MerchantAccountInformation `json:"merchantAccountInformation"`
 
-		// Merchant Category Code MCC
+		// Merchant Category Code MCC: tag 52
 		// identity merchant type
 		// apply different fee base on mcc
 		Mcc string `json:"mcc"`
@@ -37,6 +37,9 @@ type (
 		// Mã quốc gia: tag 58
 		// mặc định là VN
 		CountryCode string `json:"countryCode"`
+
+		// Merchant Reciever Name: tag 59
+		ReceiverName string `json:"recieveName"`
 
 		// Thông tin bổ sung: tag 62
 		AdditionalDataFieldTemplate `json:"additionalDataFieldTemplate"`
