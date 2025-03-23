@@ -16,7 +16,8 @@ func main() {
 		AdditionalDataFieldTemplate: vietqr.AdditionalDataFieldTemplate{
 			Description: "test noi dungtest noi dungtest noi dungtest noi dung",
 		},
-		// Mcc: "5139",
+		Mcc:          "5139",
+		ReceiverName: "Cty ABC",
 	})
 
 	fmt.Println("content-main:", content)

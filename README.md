@@ -27,29 +27,34 @@ go get github.com/ducnpdev/vietqr
 
 ## Ví Dụ:
 ```golang
-package vietqr
+package main
 
 import (
 	"fmt"
+
+	"github.com/ducnpdev/vietqr"
 )
 
 func main() {
-	content := GenerateViQR(RequestGenerateViQR{
-		MerchantAccountInformation: MerchantAccountInformation{
+	content := vietqr.GenerateViQR(vietqr.RequestGenerateViQR{
+		MerchantAccountInformation: vietqr.MerchantAccountInformation{
 			AccountNo: "999990335280715",
 		},
 		TransactionAmount: "505000",
-		AdditionalDataFieldTemplate: AdditionalDataFieldTemplate{
-			Description: "test noi dung",
+
+		AdditionalDataFieldTemplate: vietqr.AdditionalDataFieldTemplate{
+			Description: "test noi dungtest noi dungtest noi dungtest noi dung",
 		},
+		Mcc:          "5139",
+		ReceiverName: "Cty ABC",
 	})
 
 	fmt.Println("content-main:", content)
-    // => 00020101021238590010A0000007270129000697043701159999903352807150208QRIBFTTA53037045406505005802VN62170813test noi dung630433C4
 }
 ```
 
 ## Tách Các Filed Tag
+- golang vietqr detech qr.
 ```txt
 0002
     01
@@ -76,8 +81,36 @@ func main() {
 6217
     0813
         test noi dung
+5907
+    Cty ABC
 6304
     33C4
+```
+- detech qr trên mạnh:
+```txt
+0002010102125406930000
+3857
+    0010
+        A000000727
+    0127
+        0006
+            970437
+        0113
+            QR50317S75UDT
+    0208
+        QRIBFTTA
+5303
+    704
+5802
+    VN
+6292
+    0325
+        TRUONG TIEU HOC NGHIA TAN
+    0719
+        02770002virtualNONE
+    0836
+        BYMII0HL5E AD87PI 03 2025 THT SON 4P
+6304614A
 ```
 
 ## License
