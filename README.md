@@ -1,59 +1,119 @@
 # VietQR - Golang
-![](https://res.cloudinary.com/taskmanagereaglob123/image/upload/v1641970995/VietQR.46a78cbb_utwzzh.png)
 
-- thư viện hỗ trợ mã QR để thanh toán thông qua NAPAS với ngôn ngữ lập trình `Golang`
+[![Go Report Card](https://goreportcard.com/badge/github.com/ducnpdev/vietqr)](https://goreportcard.com/report/github.com/ducnpdev/vietqr)
+[![GoDoc](https://godoc.org/github.com/ducnpdev/vietqr?status.svg)](https://godoc.org/github.com/ducnpdev/vietqr)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Go Version](https://img.shields.io/badge/Go-1.16%2B-blue.svg)](https://golang.org)
 
-## Table of Contents
+<div align="center">
+  <img src="https://res.cloudinary.com/taskmanagereaglob123/image/upload/v1641970995/VietQR.46a78cbb_utwzzh.png" alt="VietQR Logo" width="200"/>
+  
+  A powerful Golang library for generating VietQR codes for NAPAS payment integration
+</div>
+
+## 📋 Table of Contents
 
 - [VietQR - Golang](#vietqr---golang)
-  - [Table of Contents](#table-of-contents)
-  - [Napas Document](#napas-document)
-  - [Chức Năng](#chức-năng)
-  - [Cài Đặt](#cài-đặt)
-  - [Ví Dụ:](#ví-dụ)
-  - [Tách Các Filed Tag](#tách-các-filed-tag)
-  - [License](#license)
+  - [📋 Table of Contents](#-table-of-contents)
+  - [🌟 Overview](#-overview)
+  - [✨ Features](#-features)
+  - [📥 Installation](#-installation)
+  - [�� Quick Start](#-quick-start)
+  - [📖 Usage Examples](#-usage-examples)
+    - [Basic Payment QR](#basic-payment-qr)
+    - [QR with Additional Data](#qr-with-additional-data)
+  - [🔍 QR Code Structure](#-qr-code-structure)
+  - [�� Documentation](#-documentation)
+  - [🤝 Contributing](#-contributing)
+  - [📄 License](#-license)
 
-## Napas Document
-- link document của napas: https://vietqr.net/portal-service/download/documents/QR_Format_T&C_v1.0_VN_092021.pdf
-## Chức Năng
-- hỗ trợ tạo ra qr để thanh toán( accountNo, amount, nội dung, ...)
+## 🌟 Overview
 
-## Cài Đặt
+VietQR is a Golang library that simplifies the generation of QR codes for NAPAS payment integration in Vietnam. It provides a clean and efficient way to create payment QR codes that comply with the NAPAS VietQR standard.
+
+## ✨ Features
+
+- 🚀 Simple and intuitive API
+- 💰 Support for all NAPAS VietQR payment fields
+- 🔒 Type-safe implementation
+- 📝 Comprehensive field validation
+- 🎯 QR code generation for various payment scenarios
+- 🔍 QR code parsing and validation
+- 📚 Well-documented code
+
+## 📥 Installation
 
 ```bash
 go get github.com/ducnpdev/vietqr
 ```
 
-## Ví Dụ:
-```golang
+## �� Quick Start
+
+```go
 package main
 
 import (
-	"fmt"
-
-	"github.com/ducnpdev/vietqr"
+    "fmt"
+    "github.com/ducnpdev/vietqr"
 )
 
 func main() {
-	content := vietqr.GenerateViQR(vietqr.RequestGenerateViQR{
-		MerchantAccountInformation: vietqr.MerchantAccountInformation{
-			AccountNo: "999990335280715",
-		},
-		TransactionAmount: "505000",
+    // Create a VietQR payment request
+    qrRequest := vietqr.RequestGenerateViQR{
+        MerchantAccountInformation: vietqr.MerchantAccountInformation{
+            AccountNo: "999990335280715",
+        },
+        TransactionAmount: "505000",
+        AdditionalDataFieldTemplate: vietqr.AdditionalDataFieldTemplate{
+            Description: "Payment for services",
+        },
+        Mcc:          "5139",
+        ReceiverName: "Company ABC",
+    }
 
-		AdditionalDataFieldTemplate: vietqr.AdditionalDataFieldTemplate{
-			Description: "test noi dungtest noi dungtest noi dungtest noi dung",
-		},
-		Mcc:          "5139",
-		ReceiverName: "Cty ABC",
-	})
-
-	fmt.Println("content-main:", content)
+    // Generate the VietQR code
+    qrContent := vietqr.GenerateViQR(qrRequest)
+    fmt.Println("Generated VietQR Content:", qrContent)
 }
 ```
 
-## Tách Các Filed Tag
+## 📖 Usage Examples
+
+### Basic Payment QR
+```go
+qrRequest := vietqr.RequestGenerateViQR{
+    MerchantAccountInformation: vietqr.MerchantAccountInformation{
+        AccountNo: "999990335280715",
+    },
+    TransactionAmount: "100000",
+    AdditionalDataFieldTemplate: vietqr.AdditionalDataFieldTemplate{
+        Description: "Basic payment",
+    },
+    Mcc:          "5139",
+    ReceiverName: "Merchant Name",
+}
+```
+
+### QR with Additional Data
+```go
+qrRequest := vietqr.RequestGenerateViQR{
+    MerchantAccountInformation: vietqr.MerchantAccountInformation{
+        AccountNo: "999990335280715",
+    },
+    TransactionAmount: "200000",
+    AdditionalDataFieldTemplate: vietqr.AdditionalDataFieldTemplate{
+        Description: "Detailed payment information",
+        // Add more fields as needed
+    },
+    Mcc:          "5139",
+    ReceiverName: "Merchant Name",
+}
+```
+
+## 🔍 QR Code Structure
+
+The VietQR code follows the NAPAS standard structure. Here's an example of the QR code field breakdown:
+
 - golang vietqr detech qr.
 ```txt
 0002
@@ -86,32 +146,28 @@ func main() {
 6304
     33C4
 ```
-- detech qr trên mạnh:
-```txt
-0002010102125406930000
-3857
-    0010
-        A000000727
-    0127
-        0006
-            970437
-        0113
-            QR50317S75UDT
-    0208
-        QRIBFTTA
-5303
-    704
-5802
-    VN
-6292
-    0325
-        TRUONG TIEU HOC NGHIA TAN
-    0719
-        02770002virtualNONE
-    0836
-        BYMII0HL5E AD87PI 03 2025 THT SON 4P
-6304614A
-```
 
-## License
-MIT License
+## �� Documentation
+
+For detailed documentation about the VietQR standard, please refer to the official NAPAS documentation:
+- [NAPAS VietQR Documentation](https://vietqr.net/portal-service/download/documents/QR_Format_T&C_v1.0_VN_092021.pdf)
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+<div align="center">
+  Made with ❤️ by <a href="https://github.com/ducnpdev">ducnpdev</a>
+</div>
